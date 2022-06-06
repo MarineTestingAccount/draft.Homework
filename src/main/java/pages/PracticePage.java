@@ -38,16 +38,14 @@ public class PracticePage {
     public PracticePage(WebDriver driver) {
         this.driver = driver;
     }
-    //Choosing RadioButton
+    //Select RadioButton
     public WebElement chooseRadio(){
-        return driver.findElement(chooseRadioButton);
+        var selectOption3 = driver.findElement(chooseRadioButton);
+        selectOption3.click();
+        return selectOption3;
     }
     //Dynamic DropDown list
-//    public WebElement dynamicDropDown(){
-//        return driver.findElement(dynamicDropDown);
-//    }
-
-    public WebElement setdynamicDropDown() {
+    public WebElement setDynamicDropDown() {
         return driver.findElement(dynamicDropDown);
     }
     public WebElement selectOptionDropDown() {
@@ -79,22 +77,39 @@ public class PracticePage {
         var windows = driver.getWindowHandle();
         driver.switchTo().window(windows);
     }
-    //Open and Accept Alert Popup
+    //Alert Popup
     public WebElement inputTextForAlert(){
         return driver.findElement(inputTextForAlert);
     }
-    public WebElement triggerAlert(){
-       return driver.findElement(alertBtn);
+    public void triggerAlert(){
+        driver.findElement(alertBtn).click();
+    }
+    public String getAlertText(){
+        triggerAlert();
+        Alert text = driver.switchTo().alert();
+        return text.getText();
+    }
+    public void acceptAlert(){
+        driver.switchTo().alert().accept();
     }
 
-    public Alert acceptAlert(){
-        driver.switchTo().alert();
-        return null;
+    //Confirm Popup
+    public WebElement inputTextForConfirm(){
+        return driver.findElement(inputTextForAlert);
     }
-
-    //Open confirm
-    public WebElement confirmInput(){
-        return driver.findElement(confirmBtn);
+    public void triggerConfirm(){
+        driver.findElement(confirmBtn).click();
+    }
+    public String getConfirmText(){
+        triggerConfirm();
+        Alert text = driver.switchTo().alert();
+        return text.getText();
+    }
+    public void acceptConfirm(){
+        driver.switchTo().alert().accept();
+    }
+    public void cancelConfirm(){
+        driver.switchTo().alert().dismiss();
     }
 
     //Hide TextBox
@@ -130,6 +145,7 @@ public class PracticePage {
         return driver.findElement(mouseHoverReload);
     }
 
+    //IFrame
     //Get iFrame
     private void getIFrame(){
         String iFrame = "courses-iframe";

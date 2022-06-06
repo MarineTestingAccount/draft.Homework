@@ -13,15 +13,14 @@ public class PracticePageTest extends BaseTest {
     @Test
     @DisplayName("RadioButton")
     public void chooseRadioButton(){
-        WebElement radio3 = practicePage.chooseRadio();
-        radio3.click();
-        assertTrue(radio3.isSelected());
+        var option = practicePage.chooseRadio();
+        assertTrue(option.isSelected());
     }
 
     @Test
     @DisplayName("Dynamic Dropdown")
     public void chooseFromDynamicDropDown() {
-        WebElement dynamicDropDown = practicePage.setdynamicDropDown();
+        WebElement dynamicDropDown = practicePage.setDynamicDropDown();
         dynamicDropDown.sendKeys("Col");
         dynamicDropDown.sendKeys(Keys.ARROW_DOWN);
         dynamicDropDown.sendKeys(Keys.ENTER);
@@ -62,24 +61,38 @@ public class PracticePageTest extends BaseTest {
         assertFalse(driver.getWindowHandle().isEmpty());
     }
 
-//    @Test
-//    @DisplayName("Alert Button")
-//    public void alert() {
-//        var inputText = practicePage.inputTextForAlert();
-//        inputText.sendKeys("Tesvan");
-//        var alertPopup = practicePage.triggerAlert();
-//        alertPopup.click();
-//
-//        Alert accept = practicePage.acceptAlert();
-//        String messageText = accept.getText();
-//        accept.accept();
-//        assertEquals(messageText,"Hello Tesvan, share this practice page and share your knowledge");
-//    }
+    @Test
+    @DisplayName("Alert Button")
+    public void alert() {
+        var inputText= practicePage.inputTextForAlert();
+        inputText.sendKeys("Tesvan");
 
-//    @Test
-//    @DisplayName("Confirm Button")
-//    public void confirm() {
-//    }
+        var messageText = practicePage.getAlertText();
+        practicePage.acceptAlert();
+        assertEquals(messageText,"Hello Tesvan, share this practice page and share your knowledge");
+    }
+
+    @Test
+    @DisplayName("Confirm Accept")
+    public void confirmAccept() {
+        var inputConfirmText= practicePage.inputTextForConfirm();
+        inputConfirmText.sendKeys("Tesvan");
+
+        var messageText = practicePage.getConfirmText();
+        practicePage.acceptConfirm();
+        assertEquals(messageText,"Hello Tesvan, Are you sure you want to confirm?");
+    }
+
+    @Test
+    @DisplayName("Confirm Cancel")
+    public void confirmCancel() {
+        var inputConfirmText= practicePage.inputTextForConfirm();
+        inputConfirmText.sendKeys("Tesvan");
+
+        var messageText = practicePage.getConfirmText();
+        practicePage.cancelConfirm();
+        assertEquals(messageText,"Hello Tesvan, Are you sure you want to confirm?");
+    }
 
     @Test
     @DisplayName("iFrame Register")
