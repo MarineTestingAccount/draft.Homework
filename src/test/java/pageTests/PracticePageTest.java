@@ -20,14 +20,10 @@ public class PracticePageTest extends BaseTest {
     @Test
     @DisplayName("Dynamic Dropdown")
     public void chooseFromDynamicDropDown() {
-        WebElement dynamicDropDown = practicePage.setDynamicDropDown();
-        dynamicDropDown.sendKeys("Col");
-        dynamicDropDown.sendKeys(Keys.ARROW_DOWN);
-        dynamicDropDown.sendKeys(Keys.ENTER);
-        //gets wrong value
-        String value = dynamicDropDown.getAttribute("value");
-        System.out.println(value);
-        assertTrue(value.contains("Col"));
+        String currentValue = "Col";
+        practicePage.setDropDown(currentValue);
+        var dynamicList = practicePage.optionListOfDynamicDropDown();
+        assertTrue(dynamicList.contains(currentValue));
     }
 
     @Test
@@ -41,9 +37,12 @@ public class PracticePageTest extends BaseTest {
     @Test
     @DisplayName("CheckBox")
     public void chooseCheckBox(){
-        WebElement checkbox3 = practicePage.selectCheckBox();
-        checkbox3.click();
-        assertTrue(checkbox3.isSelected());
+        WebElement checkbox1 = practicePage.selectCheckBox1();
+        WebElement checkbox2 = practicePage.selectCheckBox2();
+        checkbox1.click();
+        checkbox2.click();
+        assertTrue(checkbox1.isSelected());
+        assertTrue(checkbox2.isSelected());
     }
 
 //    @Test
